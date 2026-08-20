@@ -35,27 +35,37 @@ The **Order Service** stores order information in PostgreSQL and retrieves user 
 ## 3. Architecture
 
 ```text
-                    +------------------+
-                    |      Client      |
-                    +--------+---------+
-                             |
-                             | HTTP
-                             v
-                    +------------------+
-                    |  Order Service   |
-                    |     :8082        |
-                    +--------+---------+
-                             |
-                             | OpenFeign
-                             v
-                    +------------------+
-                    |  Eureka Server   |
-                    |     :8761        |
-                    +--------+---------+
-                             |
-                             | Service Discovery
-                             v
-                    +------------------+
-                    |   User Service   |
-                    |     :8081        |
-                    +------------------+
+                         +----------------+
+                         |     Client     |
+                         +-------+--------+
+                                 |
+                                 | HTTP
+                                 v
+                       +-------------------+
+                       |   Order Service   |
+                       |      :8082        |
+                       +---------+---------+
+                                 |
+                    +------------+------------+
+                    |                         |
+                    | OpenFeign               |
+                    v                         |
+             +-------------+                  |
+             |   Eureka    |                  |
+             |   Server    |                  |
+             |    :8761    |                  |
+             +------+------+                  |
+                    |                         |
+                    | Service Discovery       |
+                    v                         |
+             +-------------+                  |
+             | User Service|                  |
+             |    :8081    |                  |
+             +-------------+                  |
+                             |                |
+                 Order Data  |                |
+                             |                |
+                             v                |
+                       +-----------+          |
+                       |PostgreSQL |<--------+
+                       +-----------+
