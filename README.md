@@ -1,4 +1,4 @@
-# Order Service – Microservices with OpenFeign, Eureka & PostgreSQL
+# Microservices with OpenFeign, Eureka & PostgreSQL
 
 ## 1. Project Overview
 
