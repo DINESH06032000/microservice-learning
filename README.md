@@ -69,3 +69,27 @@ The **Order Service** stores order information in PostgreSQL and retrieves user 
                        +-----------+          |
                        |PostgreSQL |<--------+
                        +-----------+
+
+```
+---
+## 4. Features
+
+## Eureka Server
+  - Service registration
+  - Service discovery
+  - Maintains registered microservices
+  
+## User Service
+  - Create users
+  - Retrieve users
+  - Manage user information
+  - Provides REST APIs
+  
+## Order Service
+  - Create orders
+  - Retrieve orders
+  - Store orders in PostgreSQL
+  - Communicate with User Service using OpenFeign
+  - Discover User Service using Eureka
+
+---
