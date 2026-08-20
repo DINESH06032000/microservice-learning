@@ -1,37 +1,40 @@
-Order Service – Microservices with OpenFeign, Eureka & PostgreSQL
-1. Project Overview
+# Order Service – Microservices with OpenFeign, Eureka & PostgreSQL
 
-This project demonstrates a basic microservices architecture using:
+## 1. Project Overview
 
-Spring Boot
-Spring Cloud OpenFeign
-Eureka Service Discovery
-PostgreSQL
-Spring Data JPA
-REST APIs
+This project demonstrates a basic **Microservices Architecture** using:
+
+- Spring Boot
+- Spring Cloud OpenFeign
+- Eureka Service Discovery
+- PostgreSQL
+- Spring Data JPA
+- REST APIs
+- Maven
 
 The system contains three applications:
 
-Client
-   |
-   v
-Order Service
-   |
-   | OpenFeign
-   v
-Eureka Server
-   |
-   v
-User Service
+- **Eureka Server**
+- **User Service**
+- **Order Service**
 
-The Order Service stores order information in PostgreSQL and retrieves user information from the User Service through OpenFeign and Eureka.
+The **Order Service** stores order information in PostgreSQL and retrieves user information from the **User Service** through **Spring Cloud OpenFeign** and **Eureka Service Discovery**.
 
-2. Microservices
-Service	Port	Responsibility
-Eureka Server	8761	Service discovery
-User Service	8081	Manage/retrieve users
-Order Service	8082	Create/retrieve orders
-3. Architecture
+---
+
+## 2. Microservices
+
+| Service | Port | Responsibility |
+|---|---:|---|
+| Eureka Server | `8761` | Service Discovery |
+| User Service | `8081` | Manage and retrieve users |
+| Order Service | `8082` | Create and retrieve orders |
+
+---
+
+## 3. Architecture
+
+```text
                     +------------------+
                     |      Client      |
                     +--------+---------+
@@ -56,28 +59,3 @@ Order Service	8082	Create/retrieve orders
                     |   User Service   |
                     |     :8081        |
                     +------------------+
-
-Order data:
-
-Order Service
-      |
-      v
- PostgreSQL
-4. Technologies Used
-Java
-Spring Boot
-Spring Cloud
-Spring Cloud Eureka
-Spring Cloud OpenFeign
-Spring Data JPA
-PostgreSQL
-Maven
-REST API
-5. Project Structure
-microservices-project/
-│
-├── eureka-server/
-│
-├── user-service/
-│
-└── order-service/
