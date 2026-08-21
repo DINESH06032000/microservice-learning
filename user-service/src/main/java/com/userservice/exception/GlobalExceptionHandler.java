@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
             UserNotFoundException ex) {
 
         return ResponseEntity
-                .status(HttpStatus.CONFLICT)
+                .status(HttpStatus.NOT_FOUND)
                 .body(ex.getMessage());
     }
 

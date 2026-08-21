@@ -20,9 +20,10 @@ public class OrderService {
 
     public OrderResponse createOrder(OrderRequest request) {
 
+        Long userid= request.getUserId();
         // Call User Service
         UserResponse user =
-                userClient.getUserById(request.getUserId());
+                userClient.getUserById(userid);
 
         // Create Order
         OrderEntity order = new OrderEntity();
