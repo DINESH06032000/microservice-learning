@@ -8,6 +8,9 @@ import com.orderservice.dto.response.UserResponse;
 import com.orderservice.entity.OrderEntity;
 import com.orderservice.exception.OrderNotFoundException;
 import com.orderservice.repository.OrderRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,9 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final UserClient userClient;
 
+    @CircuitBreaker(name="USER-SERVICE", fallbackMethod = "fallBackCircuit")
+    @RateLimiter(name="USER-SERVICE")
+    @Retry(name="USER-SERVICE")
     public OrderResponse createOrder(OrderRequest request) {
 
         Long userid= request.getUserId();
@@ -41,6 +47,9 @@ public class OrderService {
         );
     }
 
+    @CircuitBreaker(name="USER-SERVICE", fallbackMethod = "fallBackCircuit")
+    @RateLimiter(name="USER-SERVICE")
+    @Retry(name="USER-SERVICE")
     public OrderResponse getOrderById(Long orderId) {
 
         // Get order from PostgreSQL
@@ -61,5 +70,9 @@ public class OrderService {
                 order.getUserId(),
                 user
         );
+    }
+
+    public String fallBackCircuit(Long userId, Throwable throwable) {
+        return "Service failed";
     }
 }

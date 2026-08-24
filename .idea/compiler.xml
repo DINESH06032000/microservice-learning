@@ -24,6 +24,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-gateway-service" target="17" />
+      <module name="sample" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -32,6 +33,7 @@
       <module name="apigateway-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="order-service" options="-parameters" />
+      <module name="sample" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
