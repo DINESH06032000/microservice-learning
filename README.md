@@ -37,7 +37,7 @@ Eureka provides **service discovery**, Spring Cloud LoadBalancer distributes req
 | Service | Port | Responsibility |
 |---|---:|---|
 | Eureka Server | `8761` | Service Discovery |
-| API Gateway | `8080` | Single Entry Point |
+| API Gateway | `9090` | Single Entry Point |
 | User Service | `8081` | Manage Users |
 | Order Service | `8082` | Manage Orders |
 | Order Service Instance 2 | `8083` | Load Balancing |
@@ -55,7 +55,7 @@ Eureka provides **service discovery**, Spring Cloud LoadBalancer distributes req
                                       v
                             +--------------------+
                             |    API Gateway     |
-                            |       :8080        |
+                            |       :9090        |
                             +---------+----------+
                                       |
                          +------------+------------+
@@ -218,6 +218,3 @@ Eureka provides **service discovery**, Spring Cloud LoadBalancer distributes req
                        Data Persistence
 ```
 
-            +-------------+
-            | PostgreSQL  |
-            +-------------+
