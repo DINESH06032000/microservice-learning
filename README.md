@@ -129,14 +129,14 @@ The **Order Service** stores order information in **PostgreSQL** and communicate
 
 ## 4. Main Features
 
-  Service Discovery
+Service Discovery :
 
 - Eureka Server
 - Dynamic service registration
 - Service discovery
 - Service instance management
 
-  Centralized Configuration
+Centralized Configuration :
 
 - Spring Cloud Config Server
 - GitHub-based configuration repository
@@ -144,28 +144,28 @@ The **Order Service** stores order information in **PostgreSQL** and communicate
 - Environment-specific configuration
 - Configuration version control
 
-  API Gateway
+API Gateway :
 
 - Central entry point
 - Request routing
 - Service abstraction
 - Gateway-based API access
 
-  Service Communication
+Service Communication :
 
 - Spring Cloud OpenFeign
 - Eureka-based service discovery
 - Service-to-service communication
 - Declarative REST client
 
-  Load Balancing
+Load Balancing :
 
 - Multiple service instances
 - Request distribution
 - Horizontal scaling
 - Improved service availability
 
-  Fault Tolerance
+Fault Tolerance :
 
 - Circuit Breaker
 - Retry mechanism
@@ -173,13 +173,13 @@ The **Order Service** stores order information in **PostgreSQL** and communicate
 - Fallback mechanism
 - Failure handling
 
-  Monitoring
+Monitoring :
 
 - Spring Boot Actuator
 - Health checks
 - Application metrics
 
-  Database
+Database :
 
 - PostgreSQL
 - Spring Data JPA
