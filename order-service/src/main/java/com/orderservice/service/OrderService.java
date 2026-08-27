@@ -21,25 +21,20 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final UserClient userClient;
 
-    @CircuitBreaker(name="USER-SERVICE", fallbackMethod = "fallBackCircuit")
-    @RateLimiter(name="USER-SERVICE")
-    @Retry(name="USER-SERVICE")
-    public OrderResponse createOrder(OrderRequest request) {
+    @CircuitBreaker(name = "USER-SERVICE", fallbackMethod = "createOrderFallback")
+    @RateLimiter(name = "USER-SERVICE")
+    @Retry(name = "USER-SERVICE")
+    public Object createOrder(OrderRequest request) {
 
-        Long userid= request.getUserId();
-        // Call User Service
-        UserResponse user =
-                userClient.getUserById(userid);
+        Long userId = request.getUserId();
 
-        // Create Order
+        UserResponse user = userClient.getUserById(userId);
+
         OrderEntity order = new OrderEntity();
-        order.setUserId(request.getUserId());
+        order.setUserId(userId);
 
-        // Save to PostgreSQL
-        OrderEntity savedOrder =
-                orderRepository.save(order);
+        OrderEntity savedOrder = orderRepository.save(order);
 
-        // Return response
         return new OrderResponse(
                 savedOrder.getId(),
                 savedOrder.getUserId(),
@@ -47,21 +42,19 @@ public class OrderService {
         );
     }
 
-    @CircuitBreaker(name="USER-SERVICE", fallbackMethod = "fallBackCircuit")
-    @RateLimiter(name="USER-SERVICE")
-    @Retry(name="USER-SERVICE")
-    public OrderResponse getOrderById(Long orderId) {
 
-        // Get order from PostgreSQL
-        OrderEntity order =
-                orderRepository.findById(orderId)
-                        .orElseThrow(() ->
-                                new OrderNotFoundException(
-                                        "Order not found: " + orderId
-                                )
-                        );
+    @CircuitBreaker(name = "USER-SERVICE", fallbackMethod = "getOrderFallback")
+    @RateLimiter(name = "USER-SERVICE")
+    @Retry(name = "USER-SERVICE")
+    public Object getOrderById(Long orderId) {
 
-        // Get user from User Service
+        OrderEntity order = orderRepository.findById(orderId)
+                .orElseThrow(() ->
+                        new OrderNotFoundException(
+                                "Order not found: " + orderId
+                        )
+                );
+
         UserResponse user =
                 userClient.getUserById(order.getUserId());
 
@@ -72,7 +65,21 @@ public class OrderService {
         );
     }
 
-    public String fallBackCircuit(Long userId, Throwable throwable) {
-        return "Service failed";
+
+    // Fallback for createOrder
+    public Object createOrderFallback(
+            OrderRequest request,
+            Throwable throwable) {
+
+       return "Circuit Breaker fallback: User Service is unavailable";
+    }
+
+
+    // Fallback for getOrderById
+    public Object getOrderFallback(
+            Long orderId,
+            Throwable throwable) {
+
+        return "Circuit Breaker fallback: User Service is unavailable";
     }
 }

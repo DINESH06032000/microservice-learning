@@ -20,7 +20,7 @@ public class OrderController {
     private final Environment environment;
 
     @PostMapping("/create")
-    public ResponseEntity<OrderResponse> createOrder(
+    public ResponseEntity<Object> createOrder(
             @RequestBody OrderRequest request) {
         System.out.println(environment.getProperty("local.server.port"));
         return ResponseEntity
@@ -29,7 +29,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrderResponse> getOrder(
+    public ResponseEntity<Object> getOrder(
             @PathVariable Long id) {
 
         return ResponseEntity.ok(
