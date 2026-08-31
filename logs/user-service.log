@@ -1,7 +1,0 @@
-2026-08-31 17:38:00 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-08-31 17:38:00 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-08-31 17:38:00 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2026-08-31 17:38:00 [http-nio-8081-exec-1] INFO  c.u.controller.UserController - Get user request received 
-2026-08-31 17:38:00 [http-nio-8081-exec-1] INFO  com.userservice.service.UserService - Fetching user 
-2026-08-31 17:38:00 [http-nio-8081-exec-1] DEBUG com.userservice.service.UserService - Searching database 
-2026-08-31 17:38:00 [http-nio-8081-exec-1] INFO  com.userservice.service.UserService - User retrieved successfully 

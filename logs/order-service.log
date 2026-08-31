@@ -1,9 +1,0 @@
-2026-08-31 17:37:59 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-08-31 17:37:59 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-08-31 17:37:59 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
-2026-08-31 17:37:59 [http-nio-8082-exec-1] INFO  c.o.controller.OrderController - Get order request
-2026-08-31 17:38:00 [http-nio-8082-exec-1] INFO  c.orderservice.service.OrderService - Fetching order
-2026-08-31 17:38:00 [http-nio-8082-exec-1] INFO  c.orderservice.service.OrderService - Order found successfully
-2026-08-31 17:38:00 [http-nio-8082-exec-1] INFO  c.orderservice.service.OrderService - Fetching user details from USER-SERVICE
-2026-08-31 17:38:00 [http-nio-8082-exec-1] INFO  c.orderservice.service.OrderService - User details retrieved successfully 
-2026-08-31 17:38:00 [http-nio-8082-exec-1] INFO  c.orderservice.service.OrderService - Order details retrieved successfully
