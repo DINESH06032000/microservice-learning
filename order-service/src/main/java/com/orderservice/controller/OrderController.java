@@ -26,7 +26,6 @@ public class OrderController {
             @RequestBody OrderRequest request) {
         log.info("Create order request received");
         Object response = orderService.createOrder(request);
-        log.info("Order created successfully");
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
@@ -37,7 +36,6 @@ public class OrderController {
             @PathVariable Long id) {
         log.info("Get order request");
         Object response=orderService.getOrderById(id);
-        log.info("Order retrieved successfully");
         return ResponseEntity.ok(
                 response
         );

@@ -26,7 +26,7 @@ public class OrderService {
     @CircuitBreaker(name = "USER-SERVICE", fallbackMethod = "createOrderFallback")
     @RateLimiter(name = "USER-SERVICE")
     @Retry(name = "USER-SERVICE")
-    public OrderResponse createOrder(OrderRequest request) {
+    public Object createOrder(OrderRequest request) {
         Long userId = request.getUserId();
         log.info("Creating order");
         log.info("Fetching user details from USER-SERVICE ");
@@ -48,7 +48,7 @@ public class OrderService {
     @CircuitBreaker(name = "USER-SERVICE", fallbackMethod = "getOrderFallback")
     @RateLimiter(name = "USER-SERVICE")
     @Retry(name = "USER-SERVICE")
-    public OrderResponse getOrderById(Long orderId) {
+    public Object getOrderById(Long orderId) {
         log.info("Fetching order");
         OrderEntity order = orderRepository.findById(orderId)
                 .orElseThrow(() -> {

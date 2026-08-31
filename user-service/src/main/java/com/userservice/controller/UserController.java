@@ -23,7 +23,6 @@ public class UserController {
     public ResponseEntity<UserResponse>createUser(@RequestBody UserEntity userentity){
         log.info("Create user request received");
         UserResponse userResponse = userService.createUser(userentity);
-        log.info("User created successfully ");
         return ResponseEntity
                 .status(HttpStatus.SC_CREATED)
                 .body(userResponse);
@@ -33,7 +32,6 @@ public class UserController {
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
         log.info("Get user request received ");
         UserResponse userResponse = userService.getUserById(id);
-        log.info("User retrieved successfully");
         return ResponseEntity.ok().body(userResponse);
     }
 
@@ -41,7 +39,6 @@ public class UserController {
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         log.info("Get all users request received");
         List<UserResponse> users = userService.getAllUsers();
-        log.info("Successfully retrieved users");
         return ResponseEntity.ok().body(users);
     }
 
