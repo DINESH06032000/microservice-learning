@@ -1,4 +1,4 @@
-# Microservices with OpenFeign, Eureka, API Gateway, Load Balancing, Circuit Breaker & PostgreSQL
+# Microservices with OpenFeign, Eureka, API Gateway, Load Balancing, Circuit Breaker, Config Server & PostgreSQL
 
 ## 1. Project Overview
 
@@ -6,6 +6,9 @@ This project demonstrates a **production-style Microservices Architecture** usin
 
 - Spring Boot
 - Spring Cloud
+- Spring Cloud Config Server
+- Spring Cloud Config Client
+- GitHub Config Repository
 - Spring Cloud OpenFeign
 - Eureka Service Discovery
 - Spring Cloud Gateway
@@ -22,13 +25,16 @@ This project demonstrates a **production-style Microservices Architecture** usin
 The system contains the following applications:
 
 - **Eureka Server**
+- **Config Server**
 - **API Gateway**
 - **User Service**
 - **Order Service**
 
-The **Order Service** stores order information in PostgreSQL and communicates with the **User Service** using **Spring Cloud OpenFeign**.
+The **Config Server** provides centralized configuration for the microservices by loading configuration properties from a **GitHub Config Repository**.
 
-Eureka provides **service discovery**, Spring Cloud LoadBalancer distributes requests between multiple service instances, and Resilience4j provides **fault tolerance** using Circuit Breaker, Retry, and Rate Limiter.
+The **Order Service** stores order information in **PostgreSQL** and communicates with the User Service using **Spring Cloud OpenFeign**.
+
+**Eureka** provides **service discovery**, **Spring Cloud LoadBalancer** distributes requests between multiple service instances, and **Resilience4j** provides fault tolerance using Circuit Breaker, Retry, and Rate Limiter.
 
 ---
 
@@ -37,10 +43,12 @@ Eureka provides **service discovery**, Spring Cloud LoadBalancer distributes req
 | Service | Port | Responsibility |
 |---|---:|---|
 | Eureka Server | `8761` | Service Discovery |
+| config Server | `8888` | Centralized Configuration |
 | API Gateway | `9090` | Single Entry Point |
 | User Service | `8081` | Manage Users |
 | Order Service | `8082` | Manage Orders |
 | Order Service Instance 2 | `8083` | Load Balancing |
+| Config Repository | `Github` | Store Configuration Files |
 
 ---
 
@@ -102,40 +110,62 @@ Eureka provides **service discovery**, Spring Cloud LoadBalancer distributes req
             | PostgreSQL  |
             +-------------+
 
+                 Centralized Configuration
+                           |
+                           v
+                  +----------------+
+                  |  Config Server |
+                  |      :8888     |
+                  +-------+--------+
+                          |
+                          | Reads configuration
+                          v
+                  +----------------+
+                  | GitHub Config  |
+                  |   Repository   |
+                  +----------------+
 ```
 ---
 
-# Main Features
+## 4. Main Features
 
-## 🔍 Service Discovery
+Service Discovery :
 
 - Eureka Server
 - Dynamic service registration
 - Service discovery
 - Service instance management
 
-## 🚪 API Gateway
+Centralized Configuration :
+
+- Spring Cloud Config Server
+- GitHub-based configuration repository
+- Centralized application properties
+- Environment-specific configuration
+- Configuration version control
+
+API Gateway :
 
 - Central entry point
 - Request routing
 - Service abstraction
 - Gateway-based API access
 
-## 🔗 Service Communication
+Service Communication :
 
 - Spring Cloud OpenFeign
 - Eureka-based service discovery
 - Service-to-service communication
 - Declarative REST client
 
-## ⚖️ Load Balancing
+Load Balancing :
 
 - Multiple service instances
 - Request distribution
 - Horizontal scaling
 - Improved service availability
 
-## 🛡️ Fault Tolerance
+Fault Tolerance :
 
 - Circuit Breaker
 - Retry mechanism
@@ -143,14 +173,13 @@ Eureka provides **service discovery**, Spring Cloud LoadBalancer distributes req
 - Fallback mechanism
 - Failure handling
 
-## 📊 Monitoring
+Monitoring :
 
 - Spring Boot Actuator
 - Health checks
 - Application metrics
-- Service monitoring
 
-## 🗄️ Database
+Database :
 
 - PostgreSQL
 - Spring Data JPA
@@ -158,63 +187,72 @@ Eureka provides **service discovery**, Spring Cloud LoadBalancer distributes req
 - Persistent data storage
 
 ---
-## 🔄 Project Flow
+## 5. Project Flow
 
 ```text
-                         Microservices Architecture
+                     Microservices Architecture
                                   |
                                   v
-                              Eureka
+                         GitHub Config Repo
                                   |
                                   v
-                         Service Discovery
+                           Config Server
+                                :8888
+                                  |
+                                  v
+                      Centralized Configuration
+                                  |
+                                  v
+                               Eureka
+                               :8761
+                                  |
+                                  v
+                          Service Discovery
                                   |
                                   v
                              OpenFeign
                                   |
                                   v
-                  Service-to-Service Communication
+                     Service-to-Service Communication
                                   |
                                   v
-                           API Gateway
+                            API Gateway
+                               :9090
                                   |
                                   v
-                       Centralized Routing
+                         Centralized Routing
                                   |
                                   v
-                         Load Balancer
+                           Load Balancer
                                   |
                                   v
-                   Multiple Service Instances
+                       Multiple Service Instances
                                   |
                                   v
-                       Circuit Breaker
+                          Circuit Breaker
                                   |
                                   v
-                       Fault Tolerance
+                          Fault Tolerance
                                   |
                                   v
-                             Retry
+                                Retry
                                   |
                                   v
-                    Temporary Failure Handling
+                     Temporary Failure Handling
                                   |
                                   v
-                         Rate Limiter
+                            Rate Limiter
                                   |
                                   v
-                       Traffic Control
+                          Traffic Control
                                   |
                                   v
-                            Actuator
+                              Actuator
                                   |
                                   v
-                           Monitoring
+                              PostgreSQL
                                   |
                                   v
-                         PostgreSQL
-                                  |
-                                  v
-                       Data Persistence
+                          Data Persistence
 ```
 
