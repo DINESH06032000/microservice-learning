@@ -6,6 +6,8 @@ import com.orderservice.dto.response.OrderResponse;
 import com.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +16,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/orders")
-@Slf4j
 public class OrderController {
 
     private final OrderService orderService;
-
-    private final Environment environment;
+    private static final Logger log =
+            LoggerFactory.getLogger(OrderController.class);
 
     @PostMapping("/create")
     public ResponseEntity<Object> createOrder(

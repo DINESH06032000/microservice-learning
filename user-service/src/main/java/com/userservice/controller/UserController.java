@@ -6,6 +6,8 @@ import com.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-@Slf4j
 public class UserController {
 
     private final UserService userService;
+    private static final Logger log =
+            LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/create")
     public ResponseEntity<UserResponse>createUser(@RequestBody UserEntity userentity){
